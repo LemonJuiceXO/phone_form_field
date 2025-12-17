@@ -91,6 +91,8 @@ class PhoneFormFieldState extends FormFieldState<PhoneNumber> {
   }
 
   Widget builder() {
+    final direction = Directionality.of(context);
+
     final textAlignment = _computeTextAlign();
     final countryButtonForEachSlot = _buildCountryButtonForEachSlot(
       textAlignment,
@@ -100,6 +102,7 @@ class PhoneFormFieldState extends FormFieldState<PhoneNumber> {
       enabled: widget.enabled,
       inputDecoration: widget.decoration,
       child: TextField(
+        textDirection: direction,
         decoration: widget.decoration.copyWith(
           errorText: errorText,
           prefix: countryButtonForEachSlot[_CountryButtonSlot.prefix],
@@ -161,9 +164,7 @@ class PhoneFormFieldState extends FormFieldState<PhoneNumber> {
 
   TextAlign _computeTextAlign() {
     final directionality = Directionality.of(context);
-    return directionality == TextDirection.ltr
-        ? TextAlign.start
-        : TextAlign.end;
+    return TextAlign.start;
   }
 
   /// returns where the country button is placed in the input
@@ -171,6 +172,7 @@ class PhoneFormFieldState extends FormFieldState<PhoneNumber> {
     TextAlign textAlign,
   ) {
     final countryButton = _buildCountryButton(context);
+
     if (textAlign == TextAlign.start) {
       if (widget.isCountryButtonPersistent) {
         return {_CountryButtonSlot.prefixIcon: countryButton};

@@ -72,7 +72,7 @@ class PhoneFieldView extends StatelessWidget {
     return AutofillGroup(
       child: Localizations.override(
         context: context,
-        locale: locale,
+        locale: const Locale('ar'),
         child: Builder(
           builder: (context) {
             final label = PhoneFieldLocalization.of(context).phoneNumber;
